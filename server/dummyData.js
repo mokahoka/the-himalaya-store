@@ -3,10 +3,10 @@
 module.exports = {
 	users: [
 		{
-			username: "mayank",
+			username: "mayank@1mg.com",
 			password: "1234"
 		},{
-			username: "priya",
+			username: "priya@1mg.com",
 			password: "1234"
 		},{
 			username: "admin",

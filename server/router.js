@@ -20,6 +20,7 @@ router.post('/api/', (req,res) => {
 	* sends success if username and password matches
 	* else, sends appropriate failed message!
 	*/
+	console.log("req object  is:",req.body)
 	let message = "Username doesn't exist";
 
 	if(req.body.username && req.body.username !== undefined ){

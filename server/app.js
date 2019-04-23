@@ -6,10 +6,10 @@ const port = 1337;
 const routes = require('./router.js');
 const bodyParser = require('body-parser');
 
-app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+//app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use('/api/products',(req,res,next) => {
+app.use('/api',(req,res,next) => {
 	res.header('Access-Control-Allow-Origin', '*');
 	next();
 })
