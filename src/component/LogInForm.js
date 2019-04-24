@@ -1,13 +1,16 @@
 // Log In Form component file
 
 import React from 'react';
+import { validateUser } from '../utils/api.js';
+import { checkValidUsernameFormat , checkValidPasswordFormat } from '../utils/credentials.js';
+
 
 class LogInForm extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			usernameField: "",
-			passwordField: "",
+			usernameField: "mayank@1mg.com",
+			passwordField: "123456",
 			errorMessage: "",
 		}
 	}
@@ -26,53 +29,50 @@ class LogInForm extends React.Component{
 		}));
 	}
 
+	checkUser = async (username, password) => {
+
+		// make get request with username and password
+		const response = await validateUser(username,password);
+
+		// check for response message
+		// if success => redirect to cart
+		// else => update error message
+		if(response.message !== "success"){
+			this.setState(() => ({
+				errorMessage: response.message,
+			}))
+		} 
+		else if(response.message === "success") {
+			// Redirects to cart
+			console.log("Imagine Redirecting to cart")
+		}
+	}
+
 	handleSubmit = (e) => {
 		e.preventDefault();
 		// clears any previous errors
 		this.setState( () => ({ errorMessage: ""}) );
 
-		// Validates Username
-		if( !this.state.usernameField ) {
-			this.setState(() => ({
-				errorMessage: "Email field can't be left blank"
-			}))
-			return;
-		} else {
-			// Checks for correct email format
-			const pattern = /[\w]+@[\w]+[.][\w]+/;
-			const isValid = pattern.test(this.state.usernameField);
-			if(!isValid) {
-				this.setState(() => ({
-				errorMessage: "Email is incorrect"
-				}))
-				return;
-			}  
-
+		const isUsername = checkValidUsernameFormat(this.state.usernameField); 
+		if( isUsername !== "valid") {
+			
+			this.setState(() =>({
+				errorMessage: isUsername
+			}) )
+			return
 		}
-
 		// Validates password
-		if( !this.state.passwordField ) {
-			this.setState(() => ({
-				errorMessage: "Password field can't be left blank"
-			}))
-			return;
-		} else {
-			// Checks for correct password format
-			if ( this.state.passwordField.length < 6) {
-				this.setState(() => ({
-				errorMessage: "Password is incorrect",
-				}))
-				return;
-			}
+		const isPassword = checkValidPasswordFormat(this.state.passwordField);
+		if( isPassword !== "valid") {
+
+			this.setState(() =>({
+				errorMessage: isPassword
+			}) )
+			return
 		}
 
-		// make get request with username and password
-		// check for response message
-		// if success => redirect to cart
-		// else => update error message
-
-
-		alert("Reached here")
+		// validates users credentials
+		this.checkUser(this.state.usernameField,this.state.passwordField);
 	}
 
 	render(){
