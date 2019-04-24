@@ -36,5 +36,25 @@ router.post('/api/', (req,res) => {
 	res.json({message});
 })
 
+router.put('/api/', (req, res) => {
+	let message = "unsuccessful";
+
+	if( req.body.username && req.body.username !== undefined 
+		 && req.body.password && req.body.password !== undefined){
+			
+			const user = {
+				username: req.body.username,
+				password: req.body.password,
+			}
+			data.users.push(user);
+			console.log(data.users);
+			message = "successful";
+	}
+
+	console.log(`For U: ${req.body.username} P: ${req.body.password} , response is ${message}`)
+
+	res.json({message});
+})
+
 
 module.exports = router;

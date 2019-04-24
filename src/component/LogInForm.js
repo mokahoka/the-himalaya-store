@@ -13,10 +13,12 @@ class LogInForm extends React.Component{
 			passwordField: "123456",
 			errorMessage: "",
 		}
+		this.submitBtn = React.createRef();
 	}
 
 	handleUsername = (e) => {
 		const val = e.target.value;
+		this.submitBtn.current.disabled = val.length < 1 ? true : "";
 		this.setState(() => ({
 			usernameField: val,
 		}));
@@ -24,6 +26,7 @@ class LogInForm extends React.Component{
 
 	handlePassword = (e) => {
 		const val = e.target.value;
+		this.submitBtn.current.disabled = val.length < 1 ? true : "" ;
 		this.setState(() => ({
 			passwordField: val,
 		}));
@@ -45,6 +48,7 @@ class LogInForm extends React.Component{
 		else if(response.message === "success") {
 			// Redirects to cart
 			console.log("Imagine Redirecting to cart")
+			// this.props.history.push(`/cart`);
 		}
 	}
 
@@ -87,8 +91,8 @@ class LogInForm extends React.Component{
 					<input type="password" value={this.state.passwordField} onChange={this.handlePassword} placeholder="Enter password" />
 				</section>
 				<section className="log-in-btns">
-					<input type="submit" onClick={this.handleSubmit} value="Submit" />
-					<input type="submit" value="Sign Up" /> 
+					<input type="submit" onClick={this.handleSubmit} value="Submit" ref= {this.submitBtn} disabled />
+					<input type="submit" value="Sign Up" onClick={() => this.props.history.push(`/sign-up`)}/> 
 				</section>
 			</div> )
 	}

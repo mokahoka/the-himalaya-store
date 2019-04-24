@@ -2,11 +2,13 @@
 
 import React from 'react';
 import { checkValidUsernameFormat , checkValidPasswordFormat } from '../utils/credentials.js';
-import { validateUser } from '../utils/api.js';
+import { validateUser, saveUser } from '../utils/api.js';
 
 
 class SignUpForm extends React.Component{
 
+	// To DO 
+	// just make one call for checking avaiables user and savaing user
 	constructor(props){
 		super(props);
 		this.state = {
@@ -15,10 +17,12 @@ class SignUpForm extends React.Component{
 			confPasswordField: "123456",
 			errorMessage: "",
 		}
+		this.submitBtn = React.createRef();
 	}
 
 	handleUsername = (e) => {
 		const val = e.target.value;
+		this.submitBtn.current.disabled = val.length < 1 ? true : "";
 		this.setState(() => ({
 			usernameField: val,
 		}));
@@ -27,15 +31,14 @@ class SignUpForm extends React.Component{
 	handlePassword = (e) => {
 		const val = e.target.value;
 		const name = e.target.name;
-
+		this.submitBtn.current.disabled = val.length < 1 ? true : "";
 		this.setState(() => ({
 			[name]: val,
 		}));
 	}
 
-	isUserNameAvailable = async (username) => {
+	isUserNameAvailable = async (username, password) => {
 		const response = await validateUser(username);
-		console.log(response)
 		if ( response.message !== "Username doesn't exist" ){
 			const errMessage = "This Username already exist, try a different one"
 			this.setState(() => ({
@@ -44,9 +47,13 @@ class SignUpForm extends React.Component{
 			return;
 		}
 
-		// sends data to backend 
+		// sends data to backend
+		const status = await saveUser(username, password);
+		console.log("status of saving is: ",status);
 		// redirects to cart
+
 		console.log("Imagine sign up was successful and redirected")
+		 // this.props.history.push(`/cart`);
 	}
 
 	handleSubmit = () => {
@@ -92,7 +99,7 @@ class SignUpForm extends React.Component{
 		}
 
 		// checks for username already exist or not
-		this.isUserNameAvailable(this.state.usernameField);
+		this.isUserNameAvailable(this.state.usernameField, this.state.passwordField);
 
 	}
 
@@ -110,8 +117,8 @@ class SignUpForm extends React.Component{
 					<input type="password" value={this.state.confPasswordField} name="confPasswordField" onChange={this.handlePassword} placeholder="Confirm password" />
 				</section>
 				<section className="sign-up-btns">
-					<input type="submit" onClick={this.handleSubmit} value="Submit" />
-					<input type="submit" value="Log In" /> 
+					<input type="submit" onClick={this.handleSubmit} value="Submit" disabled refs={this.submitBtn}/>
+					<input type="submit" value="Log In" onClick = {() => this.props.history.push(`/log-in`)}/> 
 				</section>
 			</div>
 		)
