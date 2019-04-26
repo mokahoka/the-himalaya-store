@@ -28,3 +28,14 @@ export const saveUser = (username,password) => {
 
 	return response;
 }
+
+export const getproducts = () => {
+	const response = axios.get(`${URL}/products`)
+					 	.then( val => val.data)
+					 	.catch( err => { console.log("Error happanned:", err) 
+								return "Some wrong happened at our server , Kindly retry again!" } )
+	
+	console.log(response);
+
+	return response;
+}
