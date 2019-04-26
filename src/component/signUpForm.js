@@ -61,7 +61,7 @@ class SignUpForm extends React.Component{
 		 	// this.props.history.push(`/cart`);
 		}
 		else{
-			console.log(status)
+			console.log(status.message)
 		}
 	}
 
@@ -109,7 +109,6 @@ class SignUpForm extends React.Component{
 
 		// checks for username already exist or not
 		this.isUserNameAvailable(this.state.usernameField, this.state.passwordField);
-
 	}
 
 	render(){
@@ -133,6 +132,7 @@ class SignUpForm extends React.Component{
 		)
 	}
 }
+
 
 const mapStateToProps = (state) => ({
 })
