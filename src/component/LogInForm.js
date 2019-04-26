@@ -18,7 +18,6 @@ class LogInForm extends React.Component{
 
 	handleUsername = (e) => {
 		const val = e.target.value;
-		this.submitBtn.current.disabled = val.length < 1 ? true : "";
 		this.setState(() => ({
 			usernameField: val,
 		}));
@@ -26,7 +25,6 @@ class LogInForm extends React.Component{
 
 	handlePassword = (e) => {
 		const val = e.target.value;
-		this.submitBtn.current.disabled = val.length < 1 ? true : "" ;
 		this.setState(() => ({
 			passwordField: val,
 		}));
@@ -79,7 +77,16 @@ class LogInForm extends React.Component{
 		this.checkUser(this.state.usernameField,this.state.passwordField);
 	}
 
+	// disableButton = () => {
+	// 	if (this.state.usernameField.length < 1 && this.state.passwordField.length < 1) this.submitBtn.current.disabled = true;
+	// 	else this.submitBtn.current.disabled = false;
+	// }
+
+	// To Do 
+	// Disabled button not working as intended;
+
 	render(){
+
 		return( 
 			<div className="log-in">
 				<h2>Log In</h2>
@@ -91,7 +98,7 @@ class LogInForm extends React.Component{
 					<input type="password" value={this.state.passwordField} onChange={this.handlePassword} placeholder="Enter password" />
 				</section>
 				<section className="log-in-btns">
-					<input type="submit" onClick={this.handleSubmit} value="Submit" ref= {this.submitBtn} disabled />
+					<input type="submit" onClick={this.handleSubmit} value="Submit" ref= {this.submitBtn} />
 					<input type="submit" value="Sign Up" onClick={() => this.props.history.push(`/sign-up`)}/> 
 				</section>
 			</div> )
