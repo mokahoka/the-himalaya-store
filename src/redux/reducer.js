@@ -1,13 +1,14 @@
 // Redux reducer module
 
-import  {combineReducers} from 'redux';
-import { ADD_USERNAME, REMOVE_USERNAME, INCREMENT, DECREMENT, REMOVE_ITEM };
+import  { combineReducers } from 'redux';
+import { CHANGE_USERNAME, REMOVE_USERNAME, INCREMENT, DECREMENT, REMOVE_ITEM } from './actions.js';
 
 
+// USER REDUCER
 function userReducer(state = "", action){
-	switch action.type{
-		
-		case ADD_USERNAME:
+	switch (action.type){
+
+		case CHANGE_USERNAME:
 			return action.payload;
 
 		case REMOVE_USERNAME:
@@ -18,25 +19,49 @@ function userReducer(state = "", action){
 	}
 }
 
+// CART REDUCER
 function cartReducer(state = [], action){
-	switch action.type{
+	switch (action.type){
 		
 		case INCREMENT:
-			const product = state.cart.length === 0 ? action.payload.item 
-							: state.cart.filter((val) => val.name !== action.payload.item.name ) 
-			product.quantity += 1;
-			return product;
+			if (true) {
+					if ( !state.cart.length ) return [{ ...action.payload, amount: 1 }];
+					else {
+						const product = state.cart.filter((val) => val.name === action.payload.name );
+						if( !product.length ) return [...state.cart, {...action.payload, amount: 1 }];
+						else {
+								product.amount += 1;
+								return state.cart.filter((val) => val.name !== action.payload.name ).concat(product);
+						}
+					}
+			}
+			break;
 
 		case DECREMENT:
-			return { username: "" }
+			if (true) {		
+				const product = state.cart.filter((val) => val.name === action.payload.name );
+				if( !product.length ) return [...state.cart];
+				else {
+					if (product.amount === 0) return state.cart.filter((val) => val.name !== action.payload.name );
+					else {
+						product.amount -= 1;
+						return state.cart.filter((val) => val.name !== action.payload.name ).concat(product);
+					}
+				}
+			}
+			break;
+
+		case REMOVE_ITEM:
+			return state.cart.filter( (val) => val.name !== action.payload.name )
 
 		default:
 			return state
 	}
 }
 
+
 const mainReducer = combineReducers({
-	user: userReducer,
+	username: userReducer,
 	cart: cartReducer,
 })
 

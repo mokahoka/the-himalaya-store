@@ -6,8 +6,12 @@ import mainReducer from './reducer.js';
 // initial state of store
 const initialState = {
 	username: "",
-	cart = [],
+	cart: [],
 }
 
-// Redux store
-const store = createStore(mainReducer, initialState);
+// Redux Store
+const store = createStore(mainReducer, initialState ,
+	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+	);
+
+export default store;

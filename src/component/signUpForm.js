@@ -3,6 +3,8 @@
 import React from 'react';
 import { checkValidUsernameFormat , checkValidPasswordFormat } from '../utils/credentials.js';
 import { validateUser, saveUser } from '../utils/api.js';
+import { connect } from 'react-redux';
+import { changeUsername } from '../redux/actions.js';
 
 
 class SignUpForm extends React.Component{
@@ -53,9 +55,14 @@ class SignUpForm extends React.Component{
 		const status = await saveUser(username, password);
 		console.log("status of saving is: ",status);
 		// redirects to cart
-
-		console.log("Imagine sign up was successful and redirected")
-		 // this.props.history.push(`/cart`);
+		if( status.message === "successful" ) {
+			this.props.onChangeUsername(this.state.usernameField);
+			console.log("Imagine sign up was successful and redirected")
+		 	// this.props.history.push(`/cart`);
+		}
+		else{
+			console.log(status)
+		}
 	}
 
 	handleSubmit = () => {
@@ -127,4 +134,12 @@ class SignUpForm extends React.Component{
 	}
 }
 
-export default SignUpForm;
+const mapStateToProps = (state) => ({
+})
+
+
+const mapDispatchToProps = {
+	onChangeUsername: changeUsername
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(SignUpForm);

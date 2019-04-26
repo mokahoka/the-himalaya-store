@@ -3,6 +3,9 @@
 import React from 'react';
 import { validateUser } from '../utils/api.js';
 import { checkValidUsernameFormat , checkValidPasswordFormat } from '../utils/credentials.js';
+import { connect } from 'react-redux';
+import { changeUsername } from '../redux/actions.js'
+
 
 
 class LogInForm extends React.Component{
@@ -14,6 +17,7 @@ class LogInForm extends React.Component{
 			errorMessage: "",
 		}
 		this.submitBtn = React.createRef();
+	//	this.onChangeUsername = this.onChangeUsername.bind(this);
 	}
 
 	handleUsername = (e) => {
@@ -30,6 +34,7 @@ class LogInForm extends React.Component{
 		}));
 	}
 
+
 	checkUser = async (username, password) => {
 
 		// make get request with username and password
@@ -45,6 +50,7 @@ class LogInForm extends React.Component{
 		} 
 		else if(response.message === "success") {
 			// Redirects to cart
+			this.props.onChangeUsername(this.state.usernameField);
 			console.log("Imagine Redirecting to cart")
 			// this.props.history.push(`/cart`);
 		}
@@ -86,7 +92,6 @@ class LogInForm extends React.Component{
 	// Disabled button not working as intended;
 
 	render(){
-
 		return( 
 			<div className="log-in">
 				<h2>Log In</h2>
@@ -105,4 +110,12 @@ class LogInForm extends React.Component{
 	}
 }
 
-export default LogInForm;
+const mapStateToProps = (state) => ({
+})
+
+
+const mapDispatchToProps = {
+	onChangeUsername: changeUsername
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(LogInForm);
