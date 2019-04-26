@@ -9,6 +9,8 @@ class SignUpForm extends React.Component{
 
 	// To DO 
 	// just make one call for checking avaiables user and savaing user
+	// Disabled button not working as intended
+
 	constructor(props){
 		super(props);
 		this.state = {
@@ -22,7 +24,7 @@ class SignUpForm extends React.Component{
 
 	handleUsername = (e) => {
 		const val = e.target.value;
-		this.submitBtn.current.disabled = val.length < 1 ? true : "";
+		// this.submitBtn.current.disabled = val.length < 1 ? true : "";
 		this.setState(() => ({
 			usernameField: val,
 		}));
@@ -31,7 +33,7 @@ class SignUpForm extends React.Component{
 	handlePassword = (e) => {
 		const val = e.target.value;
 		const name = e.target.name;
-		this.submitBtn.current.disabled = val.length < 1 ? true : "";
+		// this.submitBtn.current.disabled = val.length < 1 ? true : "";
 		this.setState(() => ({
 			[name]: val,
 		}));
@@ -117,7 +119,7 @@ class SignUpForm extends React.Component{
 					<input type="password" value={this.state.confPasswordField} name="confPasswordField" onChange={this.handlePassword} placeholder="Confirm password" />
 				</section>
 				<section className="sign-up-btns">
-					<input type="submit" onClick={this.handleSubmit} value="Submit" disabled refs={this.submitBtn}/>
+					<input type="submit" onClick={this.handleSubmit} value="Submit" refs={this.submitBtn}/>
 					<input type="submit" value="Log In" onClick = {() => this.props.history.push(`/log-in`)}/> 
 				</section>
 			</div>
