@@ -9,7 +9,7 @@ export const REMOVE_USERNAME = "REMOVE_USERNAME";
 export const INCREMENT = "INCREMENT";
 export const DECREMENT = "DECREMENT";
 export const REMOVE_ITEM = "REMOVE_ITEM";
-
+//export const ADD_ITEM = "ADD_ITEM";
 
 // USER ACTION CREATORS
 export const changeUsername = (username) => ({
@@ -41,6 +41,13 @@ export const decrementItem = (item) => ({
 		...item
 	}
 })
+
+// export const addItem = (item) => ({
+// 	type: ADD_ITEM,
+// 	payload: {
+// 		...item
+// 	}
+// })
 
 export const removeItem = (item) => ({
 	type: REMOVE_ITEM,
