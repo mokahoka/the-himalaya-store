@@ -22,16 +22,15 @@ function userReducer(state = "", action){
 // CART REDUCER
 function cartReducer(state = [], action){
 	switch (action.type){
-		
 		case INCREMENT:
 			if (true) {
-					if ( !state.cart.length ) return [{ ...action.payload, amount: 1 }];
+					if ( !state.length ) return [{ ...action.payload, amount: 1 }];
 					else {
-						const product = state.cart.filter((val) => val.name === action.payload.name );
-						if( !product.length ) return [...state.cart, {...action.payload, amount: 1 }];
+						const product = state.filter((val) => val.name === action.payload.name );
+						if( !product.length ) return [...state, {...action.payload, amount: 1 }];
 						else {
-								product.amount += 1;
-								return state.cart.filter((val) => val.name !== action.payload.name ).concat(product);
+								product[0].amount += 1;
+								return state.filter((val) => val.name !== action.payload.name ).concat(product);
 						}
 					}
 			}
@@ -39,20 +38,20 @@ function cartReducer(state = [], action){
 
 		case DECREMENT:
 			if (true) {		
-				const product = state.cart.filter((val) => val.name === action.payload.name );
-				if( !product.length ) return [...state.cart];
+				const product = state.filter((val) => val.name === action.payload.name );
+				if( !product.length ) return [...state];
 				else {
-					if (product.amount === 0) return state.cart.filter((val) => val.name !== action.payload.name );
+					if (product[0].amount === 1) return state.filter((val) => val.name !== action.payload.name );
 					else {
-						product.amount -= 1;
-						return state.cart.filter((val) => val.name !== action.payload.name ).concat(product);
+						product[0].amount -= 1;
+						return state.filter((val) => val.name !== action.payload.name ).concat(product);
 					}
 				}
 			}
 			break;
 
 		case REMOVE_ITEM:
-			return state.cart.filter( (val) => val.name !== action.payload.name )
+			return state.filter( (val) => val.name !== action.payload.name )
 
 		default:
 			return state
