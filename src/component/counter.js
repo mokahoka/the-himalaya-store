@@ -2,10 +2,12 @@
 
 import React from 'react';
 
-export default counter = (props) => (
+const counter = (props) => (
 	<div className="counter">
-		<div className="decrement" onClick={props.decrement}> - </div>
-		<span>{props.quantity}</span>
-		<div className="increment" onClick={props.increment}> + </div>
+		<button className="increment" onClick={props.increment}> + </button>
+		<p>{props.quantity}</p>
+		<button className="decrement" onClick={props.decrement}> - </button>
 	</div>
 	)
+
+export default counter;
