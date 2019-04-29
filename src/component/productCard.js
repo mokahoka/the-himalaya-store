@@ -1,17 +1,29 @@
 // Product card module
 
 import React from 'react';
+import {connect} from 'react-redux';
+import { incrementItem } from '../redux/actions.js';
 
-export default const productCard = (props) => (
+
+const productCard = (props) => (
 	<div className="product-card">
 		<div className="product-image">
-			<img src={props.image} alt={props.name}/>
+			<img src={props.product.image} alt={props.product.name}/>
 		</div>
 		<div className="product-detail">
-			<h3>{props.name}</h3>
-			<p>{props.amount}</p>
+			<h3>{props.product.name}</h3>
+			<p>{props.product.price}</p>
 		</div>
 		<hr/>
-		<button onClick="">Add</button>
+		<button onClick={() => props.addToCart(props.product)}>Add</button>
 	</div>
 )
+
+const mapStateToProps = (state) => ({
+})
+
+const mapDispatchToProps = {
+	addToCart: incrementItem
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(productCard);
