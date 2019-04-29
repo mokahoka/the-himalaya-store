@@ -2,9 +2,11 @@
 
 import React from 'react';
 
-export default const productListItem = (props) => (
+const productListItem = (props) => (
 	<div className="product-list-item">
 		<p>{props.name}</p>
 		<p>{props.amount}</p>
 	</div>
 )
+
+export default productListItem;
