@@ -4,7 +4,7 @@ import React from 'react'
 import ProductListItem from './productListItem.js';
 import Counter from './counter.js';
 import {connect} from 'react-redux';
-import { incrementItem, decrementItem } from '../redux/actions.js'
+import { incrementItem, decrementItem, removeItem } from '../redux/actions.js'
 
 
 class Cart extends React.Component{
@@ -22,6 +22,7 @@ class Cart extends React.Component{
 							<ProductListItem name={product.name} amount={product.price} />
 							{/* The counter changes the item's position in an array */}
 							<Counter quantity={product.amount} increment={ () => this.props.increment(product) } decrement={ () => this.props.decrement(product) } />
+							<button onClick={() => this.props.remove(product)}>Remove </button>
 						</div>)) }
 					<button onClick={() => this.props.history.push(`/order-summary`) }>To Checkout</button>
 				</div>
@@ -30,8 +31,6 @@ class Cart extends React.Component{
 	}
 }
 
-// this.props.history.push(`/order-summary`)
-
 const mapStateToProps = (state) => ({
 	cart: state.cart
 })
@@ -39,6 +38,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
 	increment: incrementItem,
 	decrement: decrementItem,
+	remove: removeItem,
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Cart);

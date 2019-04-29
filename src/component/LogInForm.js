@@ -52,7 +52,7 @@ class LogInForm extends React.Component{
 			// Redirects to cart
 			this.props.onChangeUsername(this.state.usernameField);
 			console.log("Imagine Redirecting to cart")
-			// this.props.history.push(`/cart`);
+			this.props.history.push(`/cart`);
 		}
 	}
 
