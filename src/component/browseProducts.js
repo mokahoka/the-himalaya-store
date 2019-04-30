@@ -29,9 +29,9 @@ class BrowseProducts extends React.Component {
 		return (
 			<div className="product-page">
 				<div className="browse-products">
-					{ /* <div className="browse-product-header">
+					<div className="browse-product-header">
 						<h1> Browse Products</h1>
-					</div> */ }
+					</div>
 					<div className="browse-product-body">
 						{/* The body for browse products */}
 						{ this.state.products && this.state.products.map((product,i) => (

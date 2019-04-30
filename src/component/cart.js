@@ -24,8 +24,9 @@ class Cart extends React.Component{
 							<Counter quantity={product.amount} increment={ () => this.props.increment(product) } decrement={ () => this.props.decrement(product) } />
 							<button onClick={() => this.props.remove(product)}>Remove </button>
 						</div>)) }
-					<button onClick={() => this.props.history.push(`/order-summary`) }>To Checkout</button>
 				</div>
+					<button onClick={() => this.props.history.push(`/order-summary`) }>To Checkout</button>
+				
 			</div>
 			)
 	}

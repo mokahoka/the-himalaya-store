@@ -1,6 +1,6 @@
-/*.App {
+.App {
   box-sizing: border-box;
-}*/
+}
 
 .log-in, .sign-up{
   display: flex;
@@ -27,7 +27,7 @@
 
 .log-in-btns > input, .sign-up-btns > input{
   padding: 10px;
-  background-color:#009688;
+  background-color: #009688;
   font-weight: bold;
   color: white;
   border-radius: 3px 3px 0 0;
@@ -39,13 +39,17 @@
 .product-page{
   display: flex;
   flex-wrap: wrap;
+  margin: auto;
+  padding-left: 20px;
 }
 
 .browse-products{
   display: flex;
   flex-wrap: wrap;
+  min-width: 500px;
   max-width: 75%;
 }
+
 .browse-product-body{
   display: flex;
   flex-wrap: wrap;
@@ -54,35 +58,128 @@
 .product-card{
   display: flex;
   flex-direction: column;
-  max-width: 40%;
-  border: 1px solid black;
-  border-radius: 5%;
-  padding: 10px;
+  min-width: 250px;
+  max-width: 30%;
+  border: 1px solid #009688;
+  border-radius: 10px;
   text-align: center;
-}
-
-.product-image{
-  width: 50%;
-  margin: auto;
-}
-
-.product-image > img {
-  width: 100%;
+  margin-right: 20px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
 }
 
 .product-card > button{
   padding: 10px;
-  border-radius: 5%;
-  background-color: #FFA000;
+  border-radius: 20px;
+  width: 40%;
+  background-color: #009688;
   color: white;
+  margin-top: auto;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: bold;
 }
 
-.product-card{
-  margin-right: 20px;
-  margin-bottom: 10px;
+.product-card > button:hover{
+  /*background-color: #FFA000;*/
+  background-color: #F57C00;
+}
+
+.product-image{
+  min-width: 100%;
+  background-color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.product-image > img {
+  width: 100%;
+  border-radius: 20px;
+}
+
+.product-detail{
+  display: flex;
+  align-items: center;
+}
+
+.product-detail > h3{
+}
+
+.product-detail > p{
+  /*margin-left: auto;
+  max-width: 50px;*/
+  margin-right: 10px;
+  font-weight: bold; 
 }
 
 .cart{
+  background-color: #F5F5F5;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.cart > button {
+  background-color: #FFA000;
+  color: white;
+  height: 50px;
+  font-weight: bold;
+  border-radius: 20px;
+  font-size: 1.2em;
+  margin-top: 5px;
+}
+
+.cart-items{
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  height: 70%;
+}
+
+.cart-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 20px;
+  margin-bottom: 15px;
+  background-color: white;
+}
+
+.cart-item > button {
+  max-width: 30%;
+  margin-right: 15px;
+}
+
+.product-list-item{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 10px;
+  /*text-align: center;*/
+}
+
+.product-list-item > p{
+  max-width: 150px;
+}
+
+.product-list-item > p + p {
+  margin-right: 20px;
+}
+
+.counter{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 30%;
+  margin-left: 35px; 
+}
+
+.counter > button{
+  width: 35% ;
+  height: 35%;
 }
 
 
