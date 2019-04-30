@@ -15,13 +15,13 @@ class OrderSummary extends React.Component {
 		return (
 				<div className="order-summary">
 					<div className="order-summary-header">
-						<h2>Order Summary</h2>
+						<h1>Order Summary</h1>
 					</div>
 					<div className="order-summary-body">
 						{ this.props.cart.map((product,i) => (
 									<div className="cart-item" key={i}>
 										<ProductListItem name={product.name} amount={product.price} />
-										<span>{product.amount}</span>
+										<p>Quantity {product.amount}</p>
 									</div>)) }
 					</div>
 					<div className="total-amount">
