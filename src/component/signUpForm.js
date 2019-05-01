@@ -12,11 +12,14 @@ class SignUpForm extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			usernameField: "mayank@1mg.com",
-			passwordField: "123456",
-			confPasswordField: "123456",
+			usernameField: "",
+			passwordField: "",
+			confPasswordField: "",
 			errorMessage: "",
 		}
+		this.usernameField = React.createRef();
+		this.passwordField = React.createRef();
+		this.confirmPasswordField = React.createRef();
 		this.submitBtn = React.createRef(); //create reference for submit button
 	}
 
@@ -52,6 +55,7 @@ class SignUpForm extends React.Component{
 			this.setState(() => ({
 				errorMessage: errMessage,
 			}))
+			this.usernameField.focus();
 			return;
 		}
 
@@ -81,6 +85,7 @@ class SignUpForm extends React.Component{
 			this.setState(() =>({
 				errorMessage: isUsername
 			}) )
+			this.usernameField.focus();
 			return
 		}
 
@@ -90,6 +95,7 @@ class SignUpForm extends React.Component{
 			this.setState(() =>({
 				errorMessage: isPassword
 			}) )
+			this.passwordField.focus();
 			return
 		}
 
@@ -100,6 +106,7 @@ class SignUpForm extends React.Component{
 			this.setState(() =>({
 				errorMessage: errMessage,
 			}) )
+			this.confirmPasswordField.focus();
 			return
 		}
 
@@ -109,6 +116,7 @@ class SignUpForm extends React.Component{
 			this.setState(() =>({
 				errorMessage: errMessage,
 			}) )
+			this.passwordField.focus();
 			return
 		}
 
@@ -123,11 +131,11 @@ class SignUpForm extends React.Component{
 				<p> { this.state.errorMessage ? this.state.errorMessage : ""} </p>
 				<section className="sign-up-fields">
 					<label>Email </label> 
-					<input type="email" value={this.state.usernameField} onChange={this.handleUsername} pattern="[\w]+@[\w]+[.][\w]+" placeholder="Enter email" />
+					<input type="email" value={this.state.usernameField} onChange={this.handleUsername} ref={(r) => this.usernameField = r} placeholder="Enter email" />
 					<label>Password </label>
-					<input type="password" value={this.state.passwordField} name="passwordField" onChange={this.handlePassword} placeholder="Enter password" />
+					<input type="password" value={this.state.passwordField} name="passwordField" onChange={this.handlePassword} ref={(r) => this.passwordField = r} placeholder="Enter password" />
 					<label>Confirm Password</label>
-					<input type="password" value={this.state.confPasswordField} name="confPasswordField" onChange={this.handlePassword} placeholder="Confirm password" />
+					<input type="password" value={this.state.confPasswordField} name="confPasswordField" onChange={this.handlePassword} ref={(r) => this.confirmPasswordField = r} placeholder="Confirm password" />
 				</section>
 				<section className="sign-up-btns">
 					<input type="submit" onClick={this.handleSubmit} value="Submit" ref={this.submitBtn} />
