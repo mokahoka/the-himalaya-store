@@ -25,7 +25,6 @@ export const saveUser = (username,password) => {
 						.then( val => val.data )
 						.catch( err => { console.log("Error happanned:", err) 
 							return "Some wrong happened at our server , Kindly retry again!" } )
-
 	return response;
 }
 
