@@ -27,7 +27,7 @@ export const checkValidPasswordFormat = (password) => {
 	if( !password ) return "Password field can't be left blank"
 	else {
 			// Checks for correct password format
-			if ( password.length < 6) return "Password is incorrect";
+			if ( password.length < 6) return "Password should be minimun 6 character long";
 		}
 	return "valid";
 }
