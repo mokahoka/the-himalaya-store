@@ -9,6 +9,13 @@
   margin: auto;
 }
 
+.log-in > h2, .sign-up > h2{
+    margin: 0;
+    padding: 10px;
+    background-color: #009688;
+    color: white;
+}
+
 .log-in > p, .sign-up > p {
   color: red;
   text-align: center;
@@ -17,12 +24,19 @@
   display: flex;
   flex-direction: column;
   font-size: 1.2em;
+  font-weight: bold;
   padding-bottom: 20px; 
 }
 
 .log-in-fields > input, .sign-up-fields > input{
   padding: 10px; 
   margin-bottom: 15px;
+  margin-top: 8px;
+  font-size: 1.1em;
+}
+
+.log-in-fields > input:focus{
+  
 }
 
 .log-in-btns > input, .sign-up-btns > input{
@@ -135,16 +149,16 @@ img[alt*="Bleminor"]{
   height: 50px;
   font-weight: bold;
   min-width: 180px;
-  border-radius: 20px;
+  border-radius: 5px;
   font-size: 1.2em;
-  margin-top: 5px;
+  margin-top: 10px;
 }
 
 .cart-items{
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
-  height: 70%;
+  height: 55%;
 }
 
 .cart-item {
@@ -153,7 +167,6 @@ img[alt*="Bleminor"]{
   align-items: center;
   justify-content: space-between;
   padding: 10px;
-  border-radius: 20px;
   margin-bottom: 15px;
   background-color: white;
 }
@@ -201,7 +214,6 @@ img[alt*="Bleminor"]{
   min-width: 300px;
   /*background-color: #80CBC4;*/
   background-color: #EEEEEE;
-  text-align: center;
   padding: 50px;
 }
 
