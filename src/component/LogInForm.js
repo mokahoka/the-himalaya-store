@@ -13,10 +13,12 @@ class LogInForm extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			usernameField: "mayank@1mg.com",
-			passwordField: "123456",
+			usernameField: "",
+			passwordField: "",
 			errorMessage: "",
 		}
+		this.usernameField = React.createRef();
+		this.passwordField = React.createRef();
 		this.submitBtn = React.createRef(); //create reference for submit button
 	}
 
@@ -27,7 +29,7 @@ class LogInForm extends React.Component{
 
 	checkSubmitStatus = () => {
 		this.submitBtn.current.disabled = this.state.usernameField && this.state.passwordField ? false : true;
-		this.submitBtn.current.style.backgroundColor = this.submitBtn.current.disabled ? "grey" : ""; // "#009688"
+		this.submitBtn.current.style.backgroundColor = this.submitBtn.current.disabled ? "grey" : "";
 	}
 
 	handleUsername = (e) => {
@@ -57,6 +59,8 @@ class LogInForm extends React.Component{
 			this.setState(() => ({
 				errorMessage: response.message,
 			}))
+			if( response.message.search("username") ) this.usernameField.focus();
+			else if( response.message.search("password") ) this.passwordField.focus();
 		} 
 		else if(response.message === "success") {
 			// Redirects to cart
@@ -77,6 +81,7 @@ class LogInForm extends React.Component{
 			this.setState(() =>({
 				errorMessage: isUsername
 			}) )
+			this.usernameField.focus();
 			return
 		}
 		// Validates password
@@ -86,6 +91,7 @@ class LogInForm extends React.Component{
 			this.setState(() =>({
 				errorMessage: isPassword
 			}) )
+			this.passwordField.focus();
 			return
 		}
 
@@ -100,9 +106,9 @@ class LogInForm extends React.Component{
 				<p> { this.state.errorMessage ? this.state.errorMessage : ""} </p>
 				<section className="log-in-fields">
 					<label>Email </label> 
-					<input type="email" value={this.state.usernameField} onChange={this.handleUsername} pattern="[\w]+@[\w]+[.][\w]+" placeholder="Enter your email" />
+					<input type="email" value={this.state.usernameField} onChange={this.handleUsername} ref={(r) => this.usernameField = r } placeholder="Enter your email" />
 					<label>Password </label>
-					<input type="password" value={this.state.passwordField} onChange={this.handlePassword} placeholder="Enter password" />
+					<input type="password" value={this.state.passwordField} onChange={this.handlePassword} ref={(r) => this.passwordField = r} placeholder="Enter password" />
 				</section>
 				<section className="log-in-btns">
 					<input type="submit" onClick={this.handleSubmit} value="Submit" ref={this.submitBtn} />
