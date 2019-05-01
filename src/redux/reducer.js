@@ -26,11 +26,11 @@ function cartReducer(state = [], action){
 			if (true) {
 					if ( !state.length ) return [{ ...action.payload, amount: 1 }];
 					else {
-						const product = state.filter((val) => val.name === action.payload.name );
-						if( !product.length ) return [...state, {...action.payload, amount: 1 }];
+						const index = state.findIndex((val) => val.name === action.payload.name );
+						if( index === -1 ) return [...state, {...action.payload, amount: 1 }];
 						else {
-								product[0].amount += 1;
-								return state.filter((val) => val.name !== action.payload.name ).concat(product);
+								state[index].amount += 1;
+								return [...state];
 						}
 					}
 			}
@@ -38,13 +38,13 @@ function cartReducer(state = [], action){
 
 		case DECREMENT:
 			if (true) {		
-				const product = state.filter((val) => val.name === action.payload.name );
-				if( !product.length ) return [...state];
+				const index = state.findIndex((val) => val.name === action.payload.name );
+				if( index === -1 ) return state;
 				else {
-					if (product[0].amount === 1) return state.filter((val) => val.name !== action.payload.name );
+					if (state[index].amount === 1) return state.filter((val) => val.name !== action.payload.name );
 					else {
-						product[0].amount -= 1;
-						return state.filter((val) => val.name !== action.payload.name ).concat(product);
+						state[index].amount -= 1;
+						return [...state];
 					}
 				}
 			}
