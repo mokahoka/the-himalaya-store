@@ -9,10 +9,6 @@ import { changeUsername } from '../redux/actions.js';
 
 class SignUpForm extends React.Component{
 
-	// To DO 
-	// just make one call for checking avaiables user and savaing user
-	// Disabled button not working as intended
-
 	constructor(props){
 		super(props);
 		this.state = {
@@ -21,24 +17,32 @@ class SignUpForm extends React.Component{
 			confPasswordField: "123456",
 			errorMessage: "",
 		}
-		this.submitBtn = React.createRef();
+		this.submitBtn = React.createRef(); //create reference for submit button
+	}
+
+	componentDidMount(){
+		// disables Submit button
+		this.checkSubmitStatus();
+	}
+
+	checkSubmitStatus = () => {
+		this.submitBtn.current.disabled = this.state.usernameField && this.state.passwordField ? false : true;
+		this.submitBtn.current.style.backgroundColor = this.submitBtn.current.disabled ? "grey" : "";
 	}
 
 	handleUsername = (e) => {
 		const val = e.target.value;
-		// this.submitBtn.current.disabled = val.length < 1 ? true : "";
 		this.setState(() => ({
 			usernameField: val,
-		}));
+		}), () => this.checkSubmitStatus());
 	}
 
 	handlePassword = (e) => {
 		const val = e.target.value;
 		const name = e.target.name;
-		// this.submitBtn.current.disabled = val.length < 1 ? true : "";
 		this.setState(() => ({
 			[name]: val,
-		}));
+		}), () => this.checkSubmitStatus());
 	}
 
 	isUserNameAvailable = async (username, password) => {
@@ -51,22 +55,24 @@ class SignUpForm extends React.Component{
 			return;
 		}
 
-		// sends data to backend
+		// sends saves user to server
 		const status = await saveUser(username, password);
-		console.log("status of saving is: ",status);
-		// redirects to cart
+		// redirects to cart if passed,
+		// prints error message if failed
 		if( status.message === "successful" ) {
 			this.props.onChangeUsername(this.state.usernameField);
-			console.log("Imagine sign up was successful and redirected")
-		 	// this.props.history.push(`/cart`);
+		 	this.props.history.push(`/cart`);
 		}
 		else{
-			console.log(status.message)
+			this.setState(() => ({
+				errorMessage: status,
+			}))
 		}
 	}
 
 	handleSubmit = () => {
 
+		// clears any previous error message
 		this.setState(() => ({ errorMessage: "" }));
 
 		// Validates Username
@@ -81,7 +87,6 @@ class SignUpForm extends React.Component{
 		// Validates password
 		const isPassword = checkValidPasswordFormat(this.state.passwordField);
 		if( isPassword !== "valid") {
-
 			this.setState(() =>({
 				errorMessage: isPassword
 			}) )
@@ -125,7 +130,7 @@ class SignUpForm extends React.Component{
 					<input type="password" value={this.state.confPasswordField} name="confPasswordField" onChange={this.handlePassword} placeholder="Confirm password" />
 				</section>
 				<section className="sign-up-btns">
-					<input type="submit" onClick={this.handleSubmit} value="Submit" refs={this.submitBtn}/>
+					<input type="submit" onClick={this.handleSubmit} value="Submit" ref={this.submitBtn} />
 					<input type="submit" value="Log In" onClick = {() => this.props.history.push(`/log-in`)}/> 
 				</section>
 			</div>

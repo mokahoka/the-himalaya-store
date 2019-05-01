@@ -51,11 +51,15 @@
   margin-right: 10px; 
 }
 
+.disabled{
+  background-color: grey;
+}
+
 .product-page{
   display: flex;
   flex-wrap: wrap;
   margin: auto;
-  padding-left: 20px;
+  padding-left: 10px;
 }
 
 .browse-products{
@@ -69,6 +73,7 @@
 .browse-product-body{
   display: flex;
   flex-wrap: wrap;
+  
 }
 
 .product-card{
@@ -123,6 +128,7 @@ img[alt*="Bleminor"]{
 .product-detail{
   display: flex;
   align-items: center;
+  justify-content: space-around;
 }
 
 .product-detail > h3{
@@ -146,8 +152,8 @@ img[alt*="Bleminor"]{
 .cart > button {
   background-color: #FFA000;
   color: white;
-  height: 50px;
   font-weight: bold;
+  height: 50px;
   min-width: 180px;
   border-radius: 5px;
   font-size: 1.2em;
@@ -166,7 +172,7 @@ img[alt*="Bleminor"]{
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
+  /*padding: 10px;*/
   margin-bottom: 15px;
   background-color: white;
 }
@@ -176,6 +182,7 @@ img[alt*="Bleminor"]{
   margin-right: 15px;
   padding: 10px;
   border-radius: 5px;
+  background-color: white;
 }
 
 .product-list-item{
@@ -260,25 +267,32 @@ MEDIA QUERIES
 @media (max-width: 767px){
 
   .log-in, .sign-up{
-    max-width: 80%;
+    max-width: 100%;
   }
   
-  .browse-product-body{
-    justify-content: center;
+  .browse-product-body {
+    justify-content: space-evenly;;
   }
 
   .product-card{
     min-width: 70%;
   }
+
+  /*.product-card + .product-card{
+    margin-right: 50px;
+  }*/
   .product-page{
-    background-color: red;
-    justify-content: center;
+    /*justify-content: center;*/
+  }
+
+  .order-summary{
+    max-width: 95%;
   }
   
 }
 
 @media (min-width: 768px){
   .log-in, .sign-up{
-    max-width: 50%;
+    max-width: 750px;
   }
 }

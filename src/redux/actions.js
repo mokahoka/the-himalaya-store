@@ -9,9 +9,10 @@ export const REMOVE_USERNAME = "REMOVE_USERNAME";
 export const INCREMENT = "INCREMENT";
 export const DECREMENT = "DECREMENT";
 export const REMOVE_ITEM = "REMOVE_ITEM";
-//export const ADD_ITEM = "ADD_ITEM";
 
-// USER ACTION CREATORS
+/*
+* USER ACTION CREATORS
+*/
 export const changeUsername = (username) => ({
 	type: CHANGE_USERNAME,
 	payload: {
@@ -27,7 +28,9 @@ export const removeUsername = (username) => ({
 })
 
 
-// CART ACTION CREATORS
+/* 
+* CART ACTION CREATORS
+*/
 export const incrementItem = (item) => ({
 	type: INCREMENT,
 	payload: {
@@ -41,13 +44,6 @@ export const decrementItem = (item) => ({
 		...item
 	}
 })
-
-// export const addItem = (item) => ({
-// 	type: ADD_ITEM,
-// 	payload: {
-// 		...item
-// 	}
-// })
 
 export const removeItem = (item) => ({
 	type: REMOVE_ITEM,

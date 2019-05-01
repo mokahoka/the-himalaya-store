@@ -11,7 +11,7 @@ router.get('/', (req,res) => {
 
 
 router.get('/api/products', (req,res) => {
-	// Gets products data and sends the array
+	// Gets products data and sends the result array to client
 	res.json(data.products);
 })
 
@@ -31,6 +31,7 @@ router.post('/api/', (req,res) => {
 		})
 	}
 
+	// Developer feature to monitor responses send to client
 	console.log(`For U: ${req.body.username} P: ${req.body.username} , response is ${message}`)
 
 	res.json({message});
@@ -38,7 +39,8 @@ router.post('/api/', (req,res) => {
 
 router.put('/api/', (req, res) => {
 	let message = "unsuccessful";
-
+	/* Saves Username and password to DataBase
+	*/
 	if( req.body.username && req.body.username !== undefined 
 		 && req.body.password && req.body.password !== undefined){
 			
@@ -51,6 +53,7 @@ router.put('/api/', (req, res) => {
 			message = "successful";
 	}
 
+	// Developer feature to monitor responses send to client
 	console.log(`For U: ${req.body.username} P: ${req.body.password} , response is ${message}`)
 
 	res.json({message});

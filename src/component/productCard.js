@@ -21,6 +21,7 @@ const productCard = (props) => (
 const mapStateToProps = (state) => ({
 })
 
+// Dispatches Add to cart action
 const mapDispatchToProps = {
 	addToCart: incrementItem
 }

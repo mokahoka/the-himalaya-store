@@ -9,6 +9,7 @@ import { changeUsername } from '../redux/actions.js'
 
 
 class LogInForm extends React.Component{
+
 	constructor(props){
 		super(props);
 		this.state = {
@@ -16,22 +17,31 @@ class LogInForm extends React.Component{
 			passwordField: "123456",
 			errorMessage: "",
 		}
-		this.submitBtn = React.createRef();
-	//	this.onChangeUsername = this.onChangeUsername.bind(this);
+		this.submitBtn = React.createRef(); //create reference for submit button
+	}
+
+	componentDidMount(){
+		// disables button
+		this.checkSubmitStatus();
+	}
+
+	checkSubmitStatus = () => {
+		this.submitBtn.current.disabled = this.state.usernameField && this.state.passwordField ? false : true;
+		this.submitBtn.current.style.backgroundColor = this.submitBtn.current.disabled ? "grey" : ""; // "#009688"
 	}
 
 	handleUsername = (e) => {
 		const val = e.target.value;
 		this.setState(() => ({
 			usernameField: val,
-		}));
+		}), () => this.checkSubmitStatus());
 	}
 
 	handlePassword = (e) => {
 		const val = e.target.value;
 		this.setState(() => ({
 			passwordField: val,
-		}));
+		}), () => this.checkSubmitStatus());
 	}
 
 
@@ -51,14 +61,14 @@ class LogInForm extends React.Component{
 		else if(response.message === "success") {
 			// Redirects to cart
 			this.props.onChangeUsername(this.state.usernameField);
-			console.log("Imagine Redirecting to cart")
 			this.props.history.push(`/cart`);
 		}
 	}
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		// clears any previous errors
+
+		// clears any previous error message
 		this.setState( () => ({ errorMessage: ""}) );
 
 		const isUsername = checkValidUsernameFormat(this.state.usernameField); 
@@ -83,14 +93,6 @@ class LogInForm extends React.Component{
 		this.checkUser(this.state.usernameField,this.state.passwordField);
 	}
 
-	// disableButton = () => {
-	// 	if (this.state.usernameField.length < 1 && this.state.passwordField.length < 1) this.submitBtn.current.disabled = true;
-	// 	else this.submitBtn.current.disabled = false;
-	// }
-
-	// To Do 
-	// Disabled button not working as intended;
-
 	render(){
 		return( 
 			<div className="log-in">
@@ -103,16 +105,16 @@ class LogInForm extends React.Component{
 					<input type="password" value={this.state.passwordField} onChange={this.handlePassword} placeholder="Enter password" />
 				</section>
 				<section className="log-in-btns">
-					<input type="submit" onClick={this.handleSubmit} value="Submit" ref= {this.submitBtn} />
-					<input type="submit" value="Sign Up" onClick={() => this.props.history.push(`/sign-up`)}/> 
+					<input type="submit" onClick={this.handleSubmit} value="Submit" ref={this.submitBtn} />
+					<input type="submit" value="Sign Up" onClick={() => this.props.history.push(`/sign-up`)}/>
 				</section>
 			</div> )
 	}
 }
 
+
 const mapStateToProps = (state) => ({
 })
-
 
 const mapDispatchToProps = {
 	onChangeUsername: changeUsername

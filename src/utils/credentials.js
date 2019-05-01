@@ -2,7 +2,7 @@
 
 export const checkValidUsernameFormat = (username) => {
 	/*checks for valid email format
-	* returns valid for valid password format
+	* returns valid for valid format
 	* returns error message for invalid format
 	*/
 
@@ -20,7 +20,7 @@ export const checkValidUsernameFormat = (username) => {
 
 export const checkValidPasswordFormat = (password) => {
 	/* checks for valid password field
-	* returns valid for valid password format
+	* returns valid for valid format
 	* returns error message for invalid format
 	*/
 
