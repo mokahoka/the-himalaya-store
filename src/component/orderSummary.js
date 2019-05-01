@@ -22,11 +22,12 @@ class OrderSummary extends React.Component {
 									<div className="cart-item" key={i}>
 										<ProductListItem name={product.name} amount={product.price} />
 										<p>Quantity {product.amount}</p>
+										<p>{`${product.price[0]}${product.amount*parseInt(product.price.slice(1))}`}</p>
 									</div>)) }
 					</div>
 					<div className="total-amount">
 						<h3>Total</h3>
-						<p>{ this.calcTotal() }</p>
+						<p>{!this.props.cart[0] ? 0 : this.props.cart[0].price[0] + this.calcTotal() }</p>
 					</div>
 				</div> )
 	}
