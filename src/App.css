@@ -1,6 +1,16 @@
 
 
-.log-in, .sign-up{
+.header{
+    display: flex;
+    max-height: 60px;
+    background-color: #205a5a;
+}
+
+.header > img {
+  max-width: 20%; 
+}
+
+.log-in, .sign-up {
   display: flex;
   flex-direction: column;
   padding: 10px;
